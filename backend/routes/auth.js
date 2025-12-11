@@ -22,9 +22,9 @@ const generateToken = (id) => {
 
 // Register User
 router.post("/register", async (req, res) => {
-  const { username, email, password } = req.body
+  const { name, email, password } = req.body
 
-  if (!username || !email || !password) {
+  if (!name || !email || !password) {
     return res
       .status(400)
       .json({ message: "Please provide all required fields" })
@@ -42,8 +42,8 @@ router.post("/register", async (req, res) => {
   const hashedPassword = await bcrypt.hash(password, 10)
 
   const newUser = await pool.query(
-    "INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING id, username, email",
-    [username, email, hashedPassword]
+    "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING id, name, email",
+    [name, email, hashedPassword]
   )
 
   const token = generateToken(newUser.rows[0].id)
@@ -89,7 +89,7 @@ router.post("/login", async (req, res) => {
   res.json({
     user: {
       id: userData.id,
-      username: userData.username,
+      name: userData.name,
       email: userData.email,
     },
     token,

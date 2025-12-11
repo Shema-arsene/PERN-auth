@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken"
 import pool from "../config/db.js"
 
-const protect = async (req, res, next) => {
+export const protect = async (req, res, next) => {
   try {
     const token = req.cookies.token
 
@@ -12,7 +12,7 @@ const protect = async (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET)
 
     const user = await pool.query(
-      "SELECT id, username, email FROM users WHERE id = $1",
+      "SELECT id, name, email FROM users WHERE id = $1",
       [decoded.id]
     )
 
