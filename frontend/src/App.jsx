@@ -1,8 +1,52 @@
+import { useEffect, useState } from "react"
+import axios from "axios"
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom"
+import Navbar from "./components/Navbar"
+import Home from "./pages/Home"
+import Register from "./pages/Register"
+import Login from "./pages/Login"
+
+axios.defaults.withCredentials = true
+
 const App = () => {
+  const [user, setUser] = useState(null)
+  const [error, setError] = useState("")
+  const [loading, setLoading] = useState(true)
+
+  const fetchUser = async () => {
+    try {
+      const response = await axios.get(`${process.env.URL}/api/auth/me`)
+      setUser(response.data)
+    } catch (error) {
+      setUser(null)
+      console.error("Error fetching user:", error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchUser()
+  }, [])
+
+  if (loading) {
+    return <div>Loading...</div>
+  }
+
   return (
-    <h1 className="text-3xl font-bold text-center capitalize my-60">
-      Hello world!
-    </h1>
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </Router>
   )
 }
 
