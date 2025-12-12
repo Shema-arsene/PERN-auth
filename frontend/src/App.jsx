@@ -1,6 +1,4 @@
-import "./App.css"
-
-function App() {
+const App = () => {
   return (
     <h1 className="text-3xl font-bold text-center capitalize my-60">
       Hello world!
