@@ -37,7 +37,11 @@ const App = () => {
   }, [])
 
   if (loading) {
-    return <div>Loading...</div>
+    return (
+      <section className="h-screen w-full flex items-center justify-center">
+        <h1 className="font-semibold">Loading...</h1>
+      </section>
+    )
   }
 
   return (
