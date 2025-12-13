@@ -20,10 +20,8 @@ const App = () => {
 
   const fetchUser = async () => {
     try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/auth/me`
-      )
-      setUser(response.data)
+      const response = await axios.get("/api/auth/me")
+      setUser(response.data.user)
     } catch (error) {
       setUser(null)
       console.error("Error fetching user:", error)

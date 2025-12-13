@@ -15,11 +15,8 @@ const Register = ({ setUser }) => {
     e.preventDefault()
 
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/auth/register`,
-        form
-      )
-      setUser(response.data)
+      const response = await axios.post("/api/auth/register", form)
+      setUser(response.data.user)
       navigate("/")
     } catch (error) {
       setError("Registration failed")
