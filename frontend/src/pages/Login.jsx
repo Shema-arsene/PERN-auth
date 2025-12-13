@@ -28,29 +28,34 @@ const Login = ({ setUser }) => {
 
   return (
     <section className="p-5 min-h-screen flex items-center justify-center">
-      <form className="bg-white p-6 rounded shadow-md" onSubmit={handleSubmit}>
+      <form
+        className="bg-white p-6 rounded shadow-md min-w-sm"
+        onSubmit={handleSubmit}
+      >
         <h2 className="font-semibold text-center my-5">Login</h2>
         {error && <p className="text-red-500 mb-4">{error}</p>}
         <div>
           <label htmlFor="email">Email: </label>
+          <br />
           <input
             type="email"
-            placeholder="email"
+            placeholder="Email"
             name="email"
             id="email"
-            className="border p-0.5 mb-2"
+            className="border border-gray-500 p-0.5 mb-2 w-full rounded"
             value={form.email}
             onChange={(e) => setForm({ ...form, email: e.target.value })}
           />
         </div>
         <div>
           <label htmlFor="password">Password: </label>
+          <br />
           <input
             type="password"
-            placeholder="password"
+            placeholder="Password"
             name="password"
             id="password"
-            className="border p-0.5 mb-2"
+            className="border border-gray-500 p-0.5 mb-2 w-full rounded"
             value={form.password}
             onChange={(e) => setForm({ ...form, password: e.target.value })}
           />
