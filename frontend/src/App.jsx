@@ -21,10 +21,14 @@ const App = () => {
 
   const fetchUser = async () => {
     try {
-      const response = await axios.get("/api/auth/me")
-      setUser(response.data.user)
+      const response = await axios.get("/api/auth/me", {
+        withCredentials: true,
+      })
+      setUser(response.data)
     } catch (error) {
-      setUser(null)
+      if (error.response?.status === 401) {
+        setUser(null)
+      }
       console.error("Error fetching user:", error)
     } finally {
       setLoading(false)
@@ -51,8 +55,14 @@ const App = () => {
         <Route path="/" element={<Home user={user} error={error} />} />
 
         {/* Auth route */}
-        <Route path="/register" element={<Register setUser={setUser} />} />
-        <Route path="/login" element={<Login setUser={setUser} />} />
+        <Route
+          path="/register"
+          element={user ? <Navigate to="/" /> : <Register setUser={setUser} />}
+        />
+        <Route
+          path="/login"
+          element={user ? <Navigate to="/" /> : <Login setUser={setUser} />}
+        />
 
         {/* Not found route */}
         <Route path="*" element={<NotFound />} />

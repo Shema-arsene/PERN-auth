@@ -9,7 +9,8 @@ const router = express.Router()
 const cookieOptions = {
   httpOnly: true,
   secure: process.env.NODE_ENV === "production",
-  sameSite: "strict",
+  // sameSite: "strict",
+  sameSite: "lax",
   maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
 }
 
@@ -50,11 +51,12 @@ router.post("/register", async (req, res) => {
 
   // Storing the token in the cookie
   res
+    .status(201)
     .cookie("token", token, cookieOptions)
     .status(201)
     .json({ user: newUser.rows[0], token })
 
-  return res.status(201).json({ user: newUser.rows[0], token })
+  // return res.status(201).json({ user: newUser.rows[0], token })
 })
 
 // Login User
