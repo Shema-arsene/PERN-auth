@@ -15,12 +15,13 @@ axios.defaults.withCredentials = true
 
 const App = () => {
   const [user, setUser] = useState(null)
-  const [error, setError] = useState("")
   const [loading, setLoading] = useState(true)
 
   const fetchUser = async () => {
     try {
-      const response = await axios.get(`${process.env.URL}/api/auth/me`)
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/auth/me`
+      )
       setUser(response.data)
     } catch (error) {
       setUser(null)
@@ -44,7 +45,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login setUser={setUser} />} />
       </Routes>
     </Router>
   )
