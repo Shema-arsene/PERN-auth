@@ -76,7 +76,7 @@ const Register = ({ setUser }) => {
           type="submit"
           className="bg-blue-500 text-white font-medium mt-3 px-3 py-1 w-full rounded-md cursor-pointer hover:bg-blue-600"
         >
-          Login
+          Register
         </button>
       </form>
     </section>
