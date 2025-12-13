@@ -15,6 +15,7 @@ axios.defaults.withCredentials = true
 
 const App = () => {
   const [user, setUser] = useState(null)
+  const [error, setError] = useState("")
   const [loading, setLoading] = useState(true)
 
   const fetchUser = async () => {
@@ -43,7 +44,7 @@ const App = () => {
     <Router>
       <Navbar user={user} setUser={setUser} />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home user={user} error={error} />} />
         <Route path="/register" element={<Register setUser={setUser} />} />
         <Route path="/login" element={<Login setUser={setUser} />} />
       </Routes>
