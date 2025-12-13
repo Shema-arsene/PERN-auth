@@ -18,7 +18,7 @@ const Login = ({ setUser }) => {
         `${import.meta.env.VITE_API_URL}/api/auth/login`,
         form
       )
-      setUser(response.data)
+      setUser(response.data.user)
       navigate("/")
     } catch (error) {
       setError("Invalid email or password, please try again.")
