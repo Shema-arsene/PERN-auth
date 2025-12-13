@@ -10,6 +10,7 @@ import Navbar from "./components/Navbar"
 import Home from "./pages/Home"
 import Register from "./pages/Register"
 import Login from "./pages/Login"
+import NotFound from "./pages/NotFound"
 
 axios.defaults.withCredentials = true
 
@@ -46,9 +47,18 @@ const App = () => {
     <Router>
       <Navbar user={user} setUser={setUser} />
       <Routes>
+        {/* Home route */}
         <Route path="/" element={<Home user={user} error={error} />} />
+
+        {/* Auth route */}
         <Route path="/register" element={<Register setUser={setUser} />} />
         <Route path="/login" element={<Login setUser={setUser} />} />
+
+        {/* Not found route */}
+        <Route path="*" element={<NotFound />} />
+
+        {/* Option to redirect to home page once user access non existing route */}
+        {/* <Route path="*" element={<Navigate to="/" replace />} /> */}
       </Routes>
     </Router>
   )
